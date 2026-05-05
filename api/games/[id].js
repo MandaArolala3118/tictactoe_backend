@@ -2,18 +2,20 @@ const express = require('express');
 const cors = require('cors');
 const { gameController } = require('../../controllers/index');
 
-const router = express.Router();
+const app = express();
 
 // Middleware
-router.use(express.json());
+app.use(cors({
+  origin: ['https://tictactoe-manda-arolala-andrianina.vercel.app', 'http://localhost:3000', 'http://localhost:8080'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
+app.use(express.json());
 
-// GET /api/games/:id - Obtenir un jeu par ID
-router.get('/', gameController.getById);
+// Routes
+app.get('/', gameController.getById);
+app.put('/', gameController.update);
+app.delete('/', gameController.delete);
 
-// PUT /api/games/:id - Mettre à jour un jeu
-router.put('/', gameController.update);
-
-// DELETE /api/games/:id - Supprimer un jeu
-router.delete('/', gameController.delete);
-
-module.exports = router;
+module.exports = app;

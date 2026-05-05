@@ -2,21 +2,21 @@ const express = require('express');
 const cors = require('cors');
 const { invitationController } = require('../../controllers/index');
 
-const router = express.Router();
+const app = express();
 
 // Middleware
-router.use(express.json());
+app.use(cors({
+  origin: ['https://tictactoe-manda-arolala-andrianina.vercel.app', 'http://localhost:3000', 'http://localhost:8080'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
+app.use(express.json());
 
-// GET /api/invitations - Obtenir toutes les invitations
-router.get('/', invitationController.getAll);
+// Routes
+app.get('/', invitationController.getAll);
+app.post('/', invitationController.create);
+app.get('/:id', invitationController.getById);
+app.post('/party', invitationController.createPartyGame);
 
-// POST /api/invitations - Créer une nouvelle invitation
-router.post('/', invitationController.create);
-
-// GET /api/invitations/:id - Obtenir une invitation par ID
-router.get('/:id', invitationController.getById);
-
-// POST /api/invitations/party - Créer une invitation pour une partie
-router.post('/party', invitationController.createPartyGame);
-
-module.exports = router;
+module.exports = app;

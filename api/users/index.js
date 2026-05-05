@@ -2,18 +2,21 @@ const express = require('express');
 const cors = require('cors');
 const { userController } = require('../../controllers/index');
 
-const router = express.Router();
+const app = express();
 
 // Middleware
-router.use(express.json());
+app.use(cors({
+  origin: ['https://tictactoe-manda-arolala-andrianina.vercel.app', 'http://localhost:3000', 'http://localhost:8080'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
+app.use(express.json());
 
-// GET /api/users - Obtenir tous les utilisateurs
-router.get('/', userController.getAll);
+// Routes
+app.get('/', userController.getAll);
+app.post('/', userController.create);
+app.get('/:id', userController.getById);
+app.delete('/:id', userController.delete);
 
-// POST /api/users - Créer un nouvel utilisateur
-router.post('/', userController.create);
-
-// GET /api/users/:id - Obtenir un utilisateur par ID
-router.get('/:id', userController.getById);
-
-module.exports = router;
+module.exports = app;
