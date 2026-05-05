@@ -5,7 +5,6 @@ const { moveController } = require('../../controllers/index');
 const router = express.Router();
 
 // Middleware
-router.use(cors());
 router.use(express.json());
 
 // GET /api/moves - Obtenir tous les mouvements

@@ -5,7 +5,6 @@ const { userController } = require('../../controllers/index');
 const router = express.Router();
 
 // Middleware
-router.use(cors());
 router.use(express.json());
 
 // GET /api/users - Obtenir tous les utilisateurs

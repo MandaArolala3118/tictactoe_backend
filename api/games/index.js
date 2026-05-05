@@ -5,7 +5,6 @@ const { gameController } = require('../../controllers/index');
 const router = express.Router();
 
 // Middleware
-router.use(cors());
 router.use(express.json());
 
 // GET /api/games - Obtenir tous les jeux

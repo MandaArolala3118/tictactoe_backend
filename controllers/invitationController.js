@@ -58,7 +58,7 @@ class InvitationController {
       
       if (error) {
         console.error('Supabase error:', error);
-        return res.status(500).json({ error: 'Failed to create invitation' });
+        return res.status(500).json({ error: 'Failed to create invitation, ' + error.message });
       }
       
       res.status(201).json(new Invitation(data));
