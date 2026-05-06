@@ -17,9 +17,7 @@ app.options('*', cors());
 
 app.use(express.json());
 
-// Routes
-app.get('/', invitationController.getAll);
-app.post('/', invitationController.create);
-app.get('/:id', invitationController.getById);
+// Route spécifique pour POST /party
+app.post('/', invitationController.createPartyGame);
 
 module.exports = app;
