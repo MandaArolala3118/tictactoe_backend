@@ -1,7 +1,8 @@
 require('dotenv').config();
 
-// Désactiver les avertissements SSL pour le développement
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+// Utiliser la variable d'environnement pour la configuration SSL
+// NODE_TLS_REJECT_UNAUTHORIZED=0 désactive la vérification SSL (développement uniquement)
+// NODE_TLS_REJECT_UNAUTHORIZED=1 active la vérification SSL (production recommandé)
 
 // Importer fetch polyfill pour Node.js v20+
 const { default: fetch } = require('node-fetch');
